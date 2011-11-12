@@ -186,8 +186,6 @@ module Rack #:nodoc:
         url << req.host
 
         scheme, port = req.scheme, req.port
-        end
-
         url
       end
 
