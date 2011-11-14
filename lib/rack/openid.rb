@@ -186,8 +186,8 @@ module Rack #:nodoc:
 	url << req.host
 
 	scheme, port = req.scheme, req.port
-	if scheme == "https" && port != 443 || scheme == "http" && port != 80
-		url << Rails.env=='production' ? ":443" : ":#{port}"
+	if (scheme == "https" && port != 443) || (scheme == "http" && port != 80)
+		url << (Rails.env=='production') ? ":443" : ":#{port}"
 	end
 	url
       end
