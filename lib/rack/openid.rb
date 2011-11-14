@@ -183,10 +183,13 @@ module Rack #:nodoc:
 
       def realm_url(req)
         url = req.scheme + "://"
-        url << req.host
+	url << req.host
 
-        scheme, port = req.scheme, req.port
-        url
+	scheme, port = req.scheme, req.port
+	if scheme == "https" && port != 443 || scheme == "http" && port != 80
+		url << Rails.env=='production' ? ":443" : ":#{port}"
+	end
+	url
       end
 
       def request_url(req)
